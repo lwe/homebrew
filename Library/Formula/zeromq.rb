@@ -15,14 +15,14 @@ class Zeromq < Formula
   def build_fat
     # make 32-bit
     arch = "-arch i386"
-    system "CFLAGS=\"$CFLAGS #{arch}\" CXXFLAGS=\"$CXXFLAGS #{arch}\" ./configure --disable-dependency-tracking --prefix=#{prefix}"
+    system "CFLAGS=\"$CFLAGS #{arch}\" CXXFLAGS=\"$CXXFLAGS #{arch}\" ./configure --disable-dependency-tracking --prefix=#{prefix} --with-pgm"
     system "make"
     system "mv src/.libs src/libs-32"
     system "make clean"
 
     # make 64-bit
     arch = "-arch x86_64"
-    system "CFLAGS=\"$CFLAGS #{arch}\" CXXFLAGS=\"$CXXFLAGS #{arch}\" ./configure --disable-dependency-tracking --prefix=#{prefix}"
+    system "CFLAGS=\"$CFLAGS #{arch}\" CXXFLAGS=\"$CXXFLAGS #{arch}\" ./configure --disable-dependency-tracking --prefix=#{prefix} --with-pgm"
     system "make"
     system "mv src/.libs/libzmq.1.dylib src/.libs/libzmq.64.dylib"
 
@@ -36,9 +36,10 @@ class Zeromq < Formula
     if ARGV.include? '--universal'
       build_fat
     else
-      system "./configure", "--disable-dependency-tracking", "--prefix=#{prefix}"
+      system "./configure", "--disable-dependency-tracking", "--prefix=#{prefix}", "--with-pgm"
     end
 
+    system "make"
     system "make install"
   end
 
