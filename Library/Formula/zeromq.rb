@@ -1,10 +1,10 @@
 require 'formula'
 
 class Zeromq < Formula
-  url 'http://download.zeromq.org/zeromq-2.1.3.tar.gz'
+  url 'http://download.zeromq.org/zeromq-2.1.4.tar.gz'
   head 'git://github.com/zeromq/zeromq2.git'
   homepage 'http://www.zeromq.org/'
-  md5 'ae681af2df1b7191aeecfcb23bb73864'
+  md5 'b9a8043792be3bfbf791e77bf3f259e8'
 
   fails_with_llvm "Compiling with LLVM gives a segfault while linking."
 
@@ -50,6 +50,11 @@ class Zeromq < Formula
     If you want to later build the Java bindings from https://github.com/zeromq/jzmq,
     you will need to obtain the Java Developer Package from Apple ADC
     at http://connect.apple.com/.
+    
+    To install the pyzmq egg with the system Python (using either pip or easy_install),
+    you may need to prepend the ARCHFLAGS as well:
+      
+      $ ARCHFLAGS="-arch i386 -arch x86_64" easy_install pyzmq
     EOS
   end
 end
